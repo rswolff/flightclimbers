@@ -1,0 +1,11 @@
+.bundle
+config/database.yml
+config/deploy.rb
+log/*.log
+tmp/**/*
+.DS_Store
+.DS_Store
+/log/*.pid
+public/system/*
+app/stylesheets/*
+.sass-cache/*
