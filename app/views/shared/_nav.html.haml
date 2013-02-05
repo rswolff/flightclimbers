@@ -20,7 +20,7 @@
                 %i.icon-list
                 Leaderbord
             %li
-              = link_to rules_contest_path(1) do
+              = link_to rules_contest_path(current_user.contest.id) do
                 %i.icon-bullhorn
                 Rules
             %li= link_to "Logout #{current_user.email}", :logout
