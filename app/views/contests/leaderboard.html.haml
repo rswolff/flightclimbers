@@ -8,6 +8,6 @@
 	- @contestants.each_with_index do |contestant, i|
 		%tr
 			%td= i+1
-			%td= link_to contestant.user.full_name, user_path(contestant.user)
+			%td= contestant.user.full_name
 
 %h3 Current Week

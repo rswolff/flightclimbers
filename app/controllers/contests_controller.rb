@@ -79,7 +79,7 @@ class ContestsController < ApplicationController
   end
 
   def leaderboard
-    @contestants = Measurement.select("sum(extended_value) as ev, measurements.user_id").where("contests.id = ?", @contest.id).joins(:user => :contest).order("extended_value").group(:user_id).limit(10)
+    @contestants = Measurement.select("sum(extended_value) as extended_value, measurements.user_id").where("contests.id = ?", @contest.id).joins(:user => :contest).order("extended_value DESC").group(:user_id)
   end
 
   def rules
