@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  contestant_id: 1
+  day_id: 1
+  up_flights: 1
+  up_flights_extended_value: 9.99
+  down_flights: 1
+  down_flights_extended_value: 9.99
+  total_flights: 1
+  total_flights_extended_value: 9.99
+
+two:
+  contestant_id: 1
+  day_id: 1
+  up_flights: 1
+  up_flights_extended_value: 9.99
+  down_flights: 1
+  down_flights_extended_value: 9.99
+  total_flights: 1
+  total_flights_extended_value: 9.99

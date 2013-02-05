@@ -1,0 +1,26 @@
+%h1 Listing Measurements
+
+%table.table.table-bordered.table-striped
+  %tr
+    %th Direction
+    %th Flights
+    %th Day
+    %th Value
+    %th Show
+    %th Edit
+    %th Destroy
+
+  - @measurements.each do |measurement|
+    %tr
+      %td
+        %i.icon-arrow-up
+      %td= measurement.number_of_flights
+      %td= measurement.day.date
+      %td= measurement.extended_value
+      %td= link_to 'Show', measurement
+      %td= link_to 'Edit', edit_measurement_path(measurement)
+      %td= link_to 'Destroy', measurement, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Measurement', new_measurement_path, class: 'btn btn-primary'

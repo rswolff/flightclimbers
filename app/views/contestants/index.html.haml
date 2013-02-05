@@ -1,0 +1,17 @@
+%h1 Listing contestants
+
+%table.table.table-bordered.table-striped
+  %tr
+    %th
+    %th
+    %th
+
+  - @contestants.each do |contestant|
+    %tr
+      %td= link_to 'Show', contestant
+      %td= link_to 'Edit', edit_contestant_path(contestant)
+      %td= link_to 'Destroy', contestant, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Contestant', new_contestant_path, class: 'btn btn-primary'

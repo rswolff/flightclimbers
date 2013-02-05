@@ -1,2 +1,6 @@
-%h1 UserSessions#new
-%p Find me in app/views/user_sessions/new.html.haml
+= form_tag user_sessions_path, :class => 'form-signin' do
+  %h2.form-signin-heading Please Sign In
+  %input#username.input-block-level{:type => "text", :name => 'username', :placeholder=>"Email address"}
+  %input#password.input-block-level{:type => "password", :name => 'password', :placeholder => "Password"}
+  = link_to "Forgot Password", new_password_reset_path, class: "btn btn-large"
+  %button.btn.btn-large.btn-primary{:type =>"submit"} Sign in

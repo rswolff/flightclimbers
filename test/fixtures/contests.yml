@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  start_date: 2013-02-02
+  end_date: 2013-02-02
+  registration_fee_cents: 
+  ascend_value: 1
+  descen_value: 1
+
+two:
+  name: MyString
+  start_date: 2013-02-02
+  end_date: 2013-02-02
+  registration_fee_cents: 
+  ascend_value: 1
+  descen_value: 1

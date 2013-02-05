@@ -1,0 +1,21 @@
+%h1 Users
+
+%table.table.table-bordered.table-striped
+  %tr
+    %th Name
+    %th Contest
+    %th Registration fee paid
+    %th Accept terms
+    %th Show
+    %th Edit
+    %th Delete
+
+  - @users.each do |user|
+    %tr
+      %td= user.full_name_last_name_first
+      %td= user.contest.name
+      %td= user.registration_fee_paid
+      %td= user.accept_terms
+      %td= link_to 'Show', user
+      %td= link_to 'Edit', edit_user_path(user)
+      %td= link_to 'Delete', user, :method => :delete, :data => { :confirm => 'Are you sure?' }

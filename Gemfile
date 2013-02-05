@@ -5,9 +5,6 @@ gem 'rails', '3.2.11'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
-
-
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -49,9 +46,11 @@ gem "state_machine"
 gem "whenever"
 gem "money-rails"
 gem "chronic"
+gem "redcarpet"
 group :development do
   gem "pry"
   gem "meta_request", "0.2.1"
+  gem "thin"
 end
 
 group :production do

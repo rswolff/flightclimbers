@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  contest_id: 1
+  contest_week: 1
+  day_id: 1
+  cweek: 1
+
+two:
+  contest_id: 1
+  contest_week: 1
+  day_id: 1
+  cweek: 1

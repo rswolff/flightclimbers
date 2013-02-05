@@ -1,0 +1,29 @@
+%h1 Contests
+
+%table.table.table-bordered.table-striped
+  %tr
+    %th Name
+    %th Start date
+    %th End date
+    %th Registration fee cents
+    %th Ascend value
+    %th Descend value
+    %th Show
+    %th Edit
+    %th Delete
+
+  - @contests.each do |contest|
+    %tr
+      %td= contest.name
+      %td= contest.start_date
+      %td= contest.end_date
+      %td= humanized_money_with_symbol contest.registration_fee_cents
+      %td= contest.ascend_value
+      %td= contest.descend_value
+      %td= link_to 'Show', contest
+      %td= link_to 'Edit', edit_contest_path(contest)
+      %td= link_to 'Delete', contest, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Contest', new_contest_path, class: 'btn btn-primary'

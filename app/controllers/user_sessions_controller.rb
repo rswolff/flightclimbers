@@ -1,4 +1,6 @@
 class UserSessionsController < ApplicationController
+  skip_before_filter :require_login
+
   def new
     @user = User.new
   end
@@ -6,11 +8,9 @@ class UserSessionsController < ApplicationController
   def create
     respond_to do |format|
       if @user = login(params[:username],params[:password])
-        format.html { redirect_back_or_to(:users, :notice => 'Login successfull.') }
-        format.xml { render :xml => @user, :status => :created, :location => @user }
+        format.html { redirect_back_or_to(contestant_path(current_user.id), :notice => 'Login successfull.') }
       else
         format.html { flash.now[:alert] = "Login failed."; render :action => "new" }
-        format.xml { render :xml => @user.errors, :status => :unprocessable_entity }
       end
     end
   end

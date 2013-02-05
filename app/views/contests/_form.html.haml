@@ -1,0 +1,36 @@
+= form_for @contest, :html => {class: 'form-horizontal'} do |f|
+  - if @contest.errors.any?
+    #error_explanation.alert-block.alert-error
+      %h2= "#{pluralize(@contest.errors.count, "error")} prohibited this contest from being saved:"
+      %ul
+        - @contest.errors.full_messages.each do |msg|
+          %li= msg
+
+  .control-group
+    = f.label :name, class: 'control-label'
+    .controls
+      = f.text_field :name
+  .control-group
+    = f.label :start_date, class: 'control-label'
+    .controls
+      = f.date_select :start_date
+  .control-group
+    = f.label :number_of_weeks, class: 'control-label'
+    .controls
+      = f.number_field :number_of_weeks, class: 'span1'
+  .control-group
+    = f.label :registration_fee, class: 'control-label'
+    .controls
+      = f.text_field :registration_fee
+  .control-group
+    = f.label :ascend_value, class: 'control-label'
+    .controls
+      = f.text_field :ascend_value
+  .control-group
+    = f.label :descend_value, class: 'control-label'
+    .controls
+      = f.text_field :descend_value
+  .control-group
+    .controls
+      .actions
+        = f.submit 'Save', class: 'btn btn-primary'

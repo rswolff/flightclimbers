@@ -1,0 +1,26 @@
+%h1= @user.full_name
+
+= link_to 'Edit Profile', edit_user_path(@user), class: 'btn btn-primary'
+
+- if can? :manage, Contest
+  %p
+    %b Registration fee paid:
+    = @user.registration_fee_paid
+  %p
+    %b Accept terms:
+    = @user.accept_terms
+
+
+%h2 History
+%table.table.table-striped
+  %tr
+    %th Date
+    %th Up
+    %th Down
+  - @user.measurements.each do |measurement|
+    %tr
+      %td= measurement.day.date
+      %td= measurement.number_of_flights if measurement.direction == 'up'
+      %td= measurement.number_of_flights if measurement.direction == 'down'
+
+

@@ -1,0 +1,20 @@
+= form_for @measurement, :html => {class: 'form-horizontal'} do |f|
+  - if @measurement.errors.any?
+    #error_explanation.alert-block.alert-error
+      %h2= "#{pluralize(@measurement.errors.count, "error")} prohibited this measurement from being saved:"
+      %ul
+        - @measurement.errors.full_messages.each do |msg|
+          %li= msg
+
+  .control-group
+    = f.label :direction, class: 'control-label'
+    .controls
+      = f.select :direction, Measurement::DIRECTIONS, {}, {class: 'span2'}
+  .control-group
+    = f.label :number_of_flights, 'Flights', class: 'control-label'
+    .controls
+      = f.number_field :number_of_flights, class: 'span1', min: 1
+  .control-group
+    .controls
+      .actions
+        = f.submit 'Save', class: 'btn btn-primary'

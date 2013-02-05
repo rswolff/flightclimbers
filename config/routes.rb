@@ -1,19 +1,23 @@
 Stairchallenge::Application.routes.draw do
-  get "pages/home"
 
-  get "user_sessions/new"
-
-  get "user_sessions/create"
-
-  get "user_sessions/destroy"
-
-  root :to => 'pages#home'
+  resources :measurements
+  resources :users
+  resources :contestants
+  resources :contests do
+    member do 
+      get 'leaderboard'
+      get 'rules'
+    end
+  end
+  resources :password_resets
+  resources :user_sessions
 
   get 'not_authorized' => 'pages#not_authorized'
-
   match 'logout' => 'user_sessions#destroy', :as => :logout
-
   match 'login' => 'user_sessions#new', :as => :login
+  get "signup" => "customers#new", :as => "signup"
+
+  root :to => 'pages#home'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

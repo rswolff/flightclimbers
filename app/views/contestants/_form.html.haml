@@ -1,0 +1,46 @@
+= form_for @contestant, :html => {class: 'form-horizontal'} do |f|
+  - if @contestant.errors.any?
+    #error_explanation.alert-block.alert-error
+      %h2= "#{pluralize(@contestant.errors.count, "error")} prohibited this contestant from being saved:"
+      %ul
+        - @contestant.errors.full_messages.each do |msg|
+          %li= msg
+
+  .control-group
+    = f.label :first_name, class: 'control-label'
+    .controls
+      = f.text_field :first_name
+  .control-group
+    = f.label :last_name, class: 'control-label'
+    .controls
+      = f.text_field :last_name
+  .control-group
+    = f.label :email, class: 'control-label'
+    .controls
+      = f.text_field :email
+  .control-group
+    = f.label :contest_id, class: 'control-label'
+    .controls
+      = f.collection_select :contest_id, Contest.all, :id, :name
+  .control-group
+    = f.label :password, class: 'control-label'
+    .controls
+      = f.password_field :password
+  .control-group
+    = f.label :password_confirmation, "Password Confirmation", class: 'control-label'
+    .controls
+      = f.password_field :password_confirmation
+  .control-group
+    .controls
+      = f.label :accept_terms, class: 'checkbox' do
+        I have read the contest rules, and agree to accept terms and conditions
+        = f.check_box :accept_terms
+  .control-group
+    .controls
+      = f.label :registration_fee_paid, class: 'checkbox' do
+        Registration Fee Paid
+        = f.check_box :registration_fee_paid
+  .control-group
+    .controls
+      .actions
+        = f.submit 'Save', class: 'btn btn-primary'

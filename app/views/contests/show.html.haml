@@ -1,0 +1,20 @@
+%p
+  %b Name:
+  = @contest.name
+%p
+  %b Start date:
+  = @contest.start_date
+%p
+  %b End date:
+  = @contest.end_date
+%p
+  %b Registration fee cents:
+  = @contest.registration_fee_cents
+%p
+  %b Ascend value:
+  = @contest.ascend_value
+%p
+  %b Descend value:
+  = @contest.descend_value
+
+= link_to 'Edit', edit_contest_path(@contest)

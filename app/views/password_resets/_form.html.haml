@@ -1,0 +1,8 @@
+= form_tag password_resets_path, {:method => :post, class: 'form-horizontal'} do
+	.control-group
+		= label_tag :email, nil, class: 'control-label'
+		.controls
+			= text_field_tag :email
+	.contol-group
+		.controls
+			= submit_tag "Reset My Password", class: 'btn btn-primary'
