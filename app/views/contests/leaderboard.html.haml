@@ -4,10 +4,11 @@
 
 %table.table.table-striped
 	%tr
+		%th.span1{style: 'text-align: center'} Rank
 		%th{colspan: 2} Contestant
 	- @contestants.each_with_index do |contestant, i|
 		%tr
-			%td= i+1
+			%td{style: 'text-align: center'}= i+1
 			%td= contestant.user.full_name
 
 %h3 Current Week
