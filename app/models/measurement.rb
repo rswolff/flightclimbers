@@ -18,11 +18,10 @@ class Measurement < ActiveRecord::Base
   end
 
   def increment_contestant_day
-
-    #get the contestant day and week summaries
-  	contestant_day = ContestantDay.where("day_id = ? AND contestant_id = ?", day.id, user.id).first
-    contestant_week = ContestantWeek.where("contest_week_id =? AND contestant_id = ?", self.contest_week, user.id).first
   	
+    contestant_day = ContestantDay.get(day.id, user.id)
+    contestant_week = ContestantWeek.get(self.contest_week, user.id)
+
   	case self.direction
   	when 'up'
 
@@ -59,7 +58,9 @@ class Measurement < ActiveRecord::Base
   end
 
   def decrement_contestant_day
-  	contestant_day = ContestantDay.where("day_id = ? AND contestant_id = ?", day.id, user.id).first
+
+    contestant_day = ContestantDay.get(day.id, user.id)
+    contestant_week = ContestantWeek.get(self.contest_week, user.id)
   	
     case self.direction
   	when 'up'
@@ -92,6 +93,7 @@ class Measurement < ActiveRecord::Base
   	end  	
 
   	contestant_day.save
+    contestant_week.save
   end
 
 end
