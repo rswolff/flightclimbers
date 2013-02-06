@@ -5,3 +5,42 @@
 #flight_tracking {
 	margin-top: 30px;
 }
+
+#count_cards {
+	.count_card {
+		border: 1px solid #CCC;
+		display: inline;
+		height: 75px;
+		margin: 20px 7px 7px 7px;
+		padding: 7px 10px;
+
+	}
+
+	.card_header {
+		font-size: 18px;
+		margin-bottom: 15px;
+	}
+
+	.card_value {
+		font-size: 38px;
+	}
+
+	.up {
+		border-color: #f9edd7;
+		background-color: #fcf7e5;
+		color: #ba965e;
+				overflow: auto;
+	}
+
+	.down {
+		border-color: #f9edd7;
+		background-color: #fcf7e5;
+		color: #ba965e;
+	}
+
+	.total {
+		border-color: #c6e7ef;
+		background-color: #ddedf6;
+		color: #4f88a9;
+	}
+}

@@ -12,6 +12,22 @@
     %b Accept terms:
     = @contestant.accept_terms
 
+#count_cards.row
+  .count_card.up.span2
+    .card_header
+      Up
+    .card_value
+      = @contestant.up
+  .count_card.down.span2
+    .card_header
+      Down
+    .card_value
+      = @contestant.down
+  .count_card.total.span2
+    .card_header
+      Total
+    .card_value
+      = @contestant.total
 #flight_tracking
   %h4 Tracking
 
