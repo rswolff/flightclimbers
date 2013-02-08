@@ -81,7 +81,7 @@
           %th Direction
           %th Extended
           %th Delete
-        - @contestant.measurements.joins(:day).order("days.date DESC").each do |measurement|
+        - @contestant.measurements.joins(:day).order("days.created_at DESC").each do |measurement|
           %tr
             %td= measurement.day.date
             %td= measurement.number_of_flights
