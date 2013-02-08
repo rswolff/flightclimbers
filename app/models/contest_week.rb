@@ -27,19 +27,19 @@ class ContestWeek < ActiveRecord::Base
   end
 
   def average_number_of_flights_up
-    Measurement.select(["AVG(number_of_flights) as avg_number_of_flights"]).where(:day_id => contest_week_day_ids).where(:user_id => contest.contestant_ids).up.first
+    Measurement.select(["SUM(number_of_flights) as sum_number_of_flights"]).where(:day_id => contest_week_day_ids).where(:user_id => contest.contestant_ids).up.first.sum_number_of_flights / contest.contestants.count
   end
 
   def average_number_of_flights_down
-    Measurement.select(["AVG(number_of_flights) as avg_number_of_flights"]).where(:day_id => contest_week_day_ids).where(:user_id => contest.contestant_ids).down.first
+    Measurement.select(["SUM(number_of_flights) as sum_number_of_flights"]).where(:day_id => contest_week_day_ids).where(:user_id => contest.contestant_ids).down.first.sum_number_of_flights / contest.contestants.count
   end
 
   def average_extended_value_up
-    Measurement.select(["AVG(extended_value) as avg_extended_flights"]).where(:day_id => contest_week_day_ids).where(:user_id => contest.contestant_ids).up.first
+    Measurement.select(["SUM(extended_value) as sum_extended_flights"]).where(:day_id => contest_week_day_ids).where(:user_id => contest.contestant_ids).up.first.sum_extended_flights / contest.contestants.count
   end
 
   def average_extended_value_down
-    Measurement.select(["AVG(extended_value) as avg_extended_flights"]).where(:day_id => contest_week_day_ids).where(:user_id => contest.contestant_ids).down.first
+    Measurement.select(["SUM(extended_value) as sum_extended_flights"]).where(:day_id => contest_week_day_ids).where(:user_id => contest.contestant_ids).down.first.sum_extended_flights / contest.contestants.count
   end
 
   private
