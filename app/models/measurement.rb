@@ -9,6 +9,10 @@ class Measurement < ActiveRecord::Base
   after_save :increment_contestant_day
   after_destroy :decrement_contestant_day
 
+  scope :in_contest, lambda { | contest_id | joins(:user => :contest).where(["contests.id = ? AND measurements.created_at BETWEEN contests.start_date AND contests.end_date", contest_id])}
+  scope :up, where(direction: 'up')
+  scope :down, where(direction: 'down')
+
   def contest_day
     ContestWeekDay.where(contest_id: self.contestant.contest.id, day_id: self.day_id).first
   end
@@ -16,6 +20,9 @@ class Measurement < ActiveRecord::Base
   def contest_week
     contest_day.contest_week.id
   end
+
+
+  private
 
   def increment_contestant_day
   	

@@ -3,6 +3,7 @@ class Contest < ActiveRecord::Base
   monetize :registration_fee_cents
 
   has_many :users
+  has_many :contestants
   has_many :contest_weeks
 
   after_create :initialize_contest_week
@@ -17,5 +18,9 @@ class Contest < ActiveRecord::Base
   		cw = ContestWeek.create(contest_id: self.id, contest_week: week + 1, start_date: s, end_date: e)
 		end
 
+  end
+
+  def contestant_ids
+    contestants.pluck(:id)
   end
 end

@@ -7,6 +7,10 @@ class ContestWeek < ActiveRecord::Base
 
   after_create :initialize_contest_week_days
 
+  scope :up, where(direction: 'up')
+  scope :down, where(direction: 'down')
+
+  #TODO: check to see if this method can be deleted
   def contestant_up_flights(contestant)
   	contestant.measurements.where(:day_id => (self.contest_week_days.pluck(:day_id))).where("measurements.direction = 'up'")
   end
@@ -17,5 +21,33 @@ class ContestWeek < ActiveRecord::Base
   		ContestWeekDay.create(contest_id: self.contest_id, contest_week_id: self.id, day_id: day.id)
   	end
   end
+
+  def contest_week_day_ids
+    days = contest_week_days.pluck(:day_id)
+  end
+
+  def average_number_of_flights_up
+    Measurement.select(["AVG(number_of_flights) as avg_number_of_flights"]).where(:day_id => contest_week_day_ids).where(:user_id => contest.contestant_ids).up.first
+  end
+
+  def average_number_of_flights_down
+    Measurement.select(["AVG(number_of_flights) as avg_number_of_flights"]).where(:day_id => contest_week_day_ids).where(:user_id => contest.contestant_ids).down.first
+  end
+
+  def average_extended_value_up
+    Measurement.select(["AVG(extended_value) as avg_extended_flights"]).where(:day_id => contest_week_day_ids).where(:user_id => contest.contestant_ids).up.first
+  end
+
+  def average_extended_value_down
+    Measurement.select(["AVG(extended_value) as avg_extended_flights"]).where(:day_id => contest_week_day_ids).where(:user_id => contest.contestant_ids).down.first
+  end
+
+  private
+  def calculate_averages
+    average_number_of_flights_up
+    average_number_of_flights_down
+    average_extended_value_up
+    average_extended_value_down
+  end  
 
 end
