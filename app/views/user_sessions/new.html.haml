@@ -4,3 +4,6 @@
   %input#password.input-block-level{:type => "password", :name => 'password', :placeholder => "Password"}
   = link_to "Forgot Password", new_password_reset_path, class: "btn btn-large"
   %button.btn.btn-large.btn-primary{:type =>"submit"} Sign in
+  %label#remember_me.checkbox
+    = check_box_tag 'remember', 1
+    Remember Me

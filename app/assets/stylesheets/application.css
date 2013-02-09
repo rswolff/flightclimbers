@@ -16,3 +16,12 @@
 
 body { margin-top: 40px;} 
 #flash {margin-top: 20px;}
+
+th.center td.center {
+	text-align: center;
+}
+
+#remember_me {
+	margin-top: 15px;
+	font-size: 15px;
+}
