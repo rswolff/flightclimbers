@@ -77,18 +77,20 @@
       %table.table.table-striped
         %tr
           %th Date
-          %th Number 
+          %th.center Number 
           %th Direction
           %th Extended
+          %th Entered
           %th Delete
-        - @contestant.measurements.joins(:day).order("days.created_at DESC").each do |measurement|
+        - @contestant.measurements.joins(:day).order("measurements.created_at DESC").each do |measurement|
           %tr
             %td= measurement.day.date
-            %td= measurement.number_of_flights
+            %td.center= measurement.number_of_flights
             %td
               - if measurement.direction == 'up'
                 %i.icon-arrow-up
               - else
                 %i.icon-arrow-down
             %td= sprintf("%5.2f", measurement.extended_value)
+            %td= measurement.created_at.to_s(:long)
             %td= link_to 'Delete', measurement, :method => :delete, :confirm => "Are you sure?"
