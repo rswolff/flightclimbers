@@ -4,7 +4,7 @@ class ContestWeek < ActiveRecord::Base
   has_many :contest_week_days
   has_many :contestant_weeks
   belongs_to :contest
-  belongs_to :contestant
+  belongs_to :contestant, :foreign_key => 'user_id'
 
   after_create :initialize_contest_week_days
 

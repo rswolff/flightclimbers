@@ -33,6 +33,7 @@ class Ability
         can :manage, [User, Contestant], :id => user.id
         can :manage, Measurement, :user_id => user.id
         can [:leaderboard, :rules], Contest
+        can [:read], Contest, :id => user.contest_id
     end
 
   end

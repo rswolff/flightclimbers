@@ -17,10 +17,19 @@
               = link_to new_measurement_path do
                 %i.icon-plus-sign
                 Add Flights
-            %li
-              = link_to current_user do
+            %li.dropdown
+              = link_to '#', class: 'dropdown-toggle', :'data-toggle' => 'dropdown' do
                 %i.icon-user
                 My Profile
+                %ul.dropdown-menu
+                  %li
+                    = link_to current_user do
+                      My Profile
+                  %li
+                    = link_to contest_path(current_user.contest) do
+                      Contests
+
+
             %li
               = link_to leaderboard_contest_path(current_user.contest) do
                 %i.icon-list
