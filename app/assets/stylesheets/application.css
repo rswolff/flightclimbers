@@ -14,7 +14,6 @@
  *= require_tree .
  */
 
-body { margin-top: 40px;} 
 #flash {margin-top: 20px;}
 
 th.center td.center {
@@ -24,4 +23,29 @@ th.center td.center {
 #remember_me {
 	margin-top: 15px;
 	font-size: 15px;
+}
+
+/* Large desktop */
+@media (min-width: 1200px) {
+	body { margin-top: 40px;} 
+}
+
+/* default */
+@media (min-width: 980px) and (max-width: 1159px) {
+	body { margin-top: 40px;} 
+}
+ 
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+	body { margin-top: 0px;} 
+}
+ 
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+	body { margin-top: 0px;} 
+}
+ 
+/* Landscape phones and down */
+@media (max-width: 480px) {
+	body { margin-top: 0px;} 
 }
