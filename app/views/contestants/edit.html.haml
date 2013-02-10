@@ -1,3 +1,35 @@
-%h1 Editing contestant
+%h1 Edit Profile
 
-= render 'form'
+= form_for @contestant, :html => {class: 'form-horizontal'} do |f|
+  - if @contestant.errors.any?
+    #error_explanation.alert-block.alert-error
+      %h2= "#{pluralize(@contestant.errors.count, "error")} prohibited this contestant from being saved:"
+      %ul
+        - @contestant.errors.full_messages.each do |msg|
+          %li= msg
+
+  .control-group
+    = f.label :first_name, class: 'control-label'
+    .controls
+      = f.text_field :first_name
+  .control-group
+    = f.label :last_name, class: 'control-label'
+    .controls
+      = f.text_field :last_name
+  .control-group
+    = f.label :display_name, class: 'control-label'
+    .controls
+      = f.text_field :display_name        
+  .control-group
+    = f.label :email, class: 'control-label'
+    .controls
+      = f.text_field :email
+  .control-group
+    = f.label :contest_id, class: 'control-label'
+    .controls
+      = f.collection_select :contest_id, Contest.all, :id, :name
+
+  .control-group
+    .controls
+      .actions
+        = f.submit 'Save', class: 'btn btn-primary'
