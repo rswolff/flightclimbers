@@ -2,7 +2,8 @@ class Contestant < User
 	has_many :contestant_day
 	has_many :measurements, :foreign_key => 'user_id'
 	has_many :contestant_days 
-	has_many :contestant_weeks 
+	has_many :contestant_weeks
+	has_many :contest_weeks, :foreign_key => 'user_id'
 
 	after_create :initialize_contestant_days, :initialize_contestant_weeks
 

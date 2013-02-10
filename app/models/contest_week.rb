@@ -4,6 +4,7 @@ class ContestWeek < ActiveRecord::Base
   has_many :contest_week_days
   has_many :contestant_weeks
   belongs_to :contest
+  belongs_to :contestant
 
   after_create :initialize_contest_week_days
 
