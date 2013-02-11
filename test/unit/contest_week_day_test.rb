@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ContestWeekDayTest < ActiveSupport::TestCase
+class ContestDayTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

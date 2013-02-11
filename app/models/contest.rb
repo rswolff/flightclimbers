@@ -5,6 +5,7 @@ class Contest < ActiveRecord::Base
   has_many :users
   has_many :contestants
   has_many :contest_weeks
+  has_many :contest_days
 
   after_create :initialize_contest_week
 
@@ -23,4 +24,13 @@ class Contest < ActiveRecord::Base
   def contestant_ids
     contestants.pluck(:id)
   end
+
+  def current_day
+    self.contest_days.joins(:day).where(["days.date = ?", Date.today]).first
+  end
+
+  def current_week
+    self.contest_weeks.where(["? >= contest_weeks.start_date AND ? <= contest_weeks.end_date", Date.today, Date.today]).first
+  end
+
 end

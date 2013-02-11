@@ -11,9 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130210052405) do
+ActiveRecord::Schema.define(:version => 20130211195839) do
 
-  create_table "contest_week_days", :force => true do |t|
+  create_table "contest_days", :force => true do |t|
     t.integer  "contest_id"
     t.integer  "contest_week_id"
     t.integer  "day_id"

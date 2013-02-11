@@ -1,4 +1,4 @@
-class ContestWeekDay < ActiveRecord::Base
+class ContestDay < ActiveRecord::Base
   attr_accessible :contest_id, :contest_week_id, :day_id
   belongs_to :contest
   belongs_to :day

@@ -14,20 +14,22 @@ class Measurement < ActiveRecord::Base
   scope :down, where(direction: 'down')
 
   def contest_day
-    ContestWeekDay.where(contest_id: self.contestant.contest.id, day_id: self.day_id).first
+    ContestDay.where(contest_id: self.contestant.contest.id, day_id: self.day_id).first
   end
 
   def contest_week
     contest_day.contest_week.id
   end
 
-
   private
 
   def increment_contestant_day
-  	
-    contestant_day = ContestantDay.get(day.id, user.id)
-    contestant_week = ContestantWeek.get(self.contest_week, user.id)
+
+    contestant_day = contestant.contest.current_day
+    contestant_week = contestant.contest.current_week
+	
+    #contestant_day = ContestantDay.get(day.id, user.id)
+    #contestant_week = ContestantWeek.get(self.contest_week, user.id)
 
   	case self.direction
   	when 'up'
@@ -60,8 +62,7 @@ class Measurement < ActiveRecord::Base
   	end
 
   	contestant_day.save
-    contestant_week.save 
-
+    contestant_week.save
   end
 
   def decrement_contestant_day

@@ -4,6 +4,7 @@ class Contestant < User
 	has_many :contestant_days 
 	has_many :contestant_weeks
 	has_many :contest_weeks, :foreign_key => 'user_id'
+	belongs_to :contest
 
 	after_create :initialize_contestant_days, :initialize_contestant_weeks
 
@@ -20,7 +21,7 @@ class Contestant < User
 	end
 
 	def initialize_contestant_days
-		ContestWeekDay.where(contest_id: self.contest.id).each do |contest_day|
+		ContestDay.where(contest_id: self.contest.id).each do |contest_day|
       ContestantDay.create(contestant_id: self.id, day_id: contest_day.day_id)
     end
 	end
