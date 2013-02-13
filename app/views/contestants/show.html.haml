@@ -48,7 +48,7 @@
             %i.icon-arrow-down
             Down
           %th Total
-        - @contestant.contestant_weeks.each do |week|
+        - current_user.contestant_weeks.each do |week|
           %tr
             %td= week.contest_week.contest_week
             %td= sprintf("%5.2f", week.up_flights_extended_value)

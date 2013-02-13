@@ -26,16 +26,20 @@ namespace :users do
 
 		contest.contest_weeks.each do |contest_week|
 
-			days = contest_week.day_ids.join(",")
+			days = contest_week.day_ids
 
 			contest.contestants.each do |contestant|
 				contestant_week = ContestantWeek.where(contest_week_id: contest_week.id, contestant_id: contestant.id).first
-				contestant_week.up_flights = Measurement.sum(:number_of_flights, :conditions => ["day_id IN (?) AND user_id = ? AND direction = 'up'", days, contestant.id])
-				contestant_week.up_flights_extended_value = Measurement.sum(:extended_value, :conditions => ["day_id IN (?) AND user_id = ? AND direction = 'up'", days, contestant.id])
-				contestant_week.down_flights = Measurement.sum(:number_of_flights, :conditions => ["day_id IN (?) AND user_id = ? AND direction = 'down'", days, contestant.id])
-				contestant_week.down_flights_extended_value = Measurement.sum(:extended_value, :conditions => ["day_id IN (?) AND user_id = ? AND direction = 'down'", days, contestant.id])
-				contestant_week.total_flights = Measurement.sum(:number_of_flights, :conditions => ["day_id IN (?) AND user_id = ?", days, contestant.id])
-				contestant_week.total_flights_extended_value = Measurement.sum(:extended_value, :conditions => ["day_id IN (?) AND user_id = ?", days, contestant.id])
+				
+				contestant_week.up_flights = 								Measurement.select("sum(number_of_flights) as sum_number_of_flights, days.date").joins(:day).where(:direction => 'up', :day_id => days, :user_id => contestant.id).first.sum_number_of_flights
+				contestant_week.up_flights_extended_value = Measurement.select("sum(extended_value) as sum_extended_value, days.date").joins(:day).where(:direction => 'up', :day_id => days, :user_id => contestant.id).first.sum_extended_value
+				
+				contestant_week.down_flights = 								Measurement.select("sum(number_of_flights) as sum_number_of_flights, days.date").joins(:day).where(:direction => 'down', :day_id => days, :user_id => contestant.id).first.sum_number_of_flights
+				contestant_week.down_flights_extended_value = Measurement.select("sum(extended_value) as sum_extended_value, days.date").joins(:day).where(:direction => 'down', :day_id => days, :user_id => contestant.id).first.sum_extended_value
+				
+				contestant_week.total_flights = 								Measurement.select("sum(number_of_flights) as sum_number_of_flights, days.date").joins(:day).where(:day_id => days, :user_id => contestant.id).first.sum_number_of_flights
+				contestant_week.total_flights_extended_value = 	Measurement.select("sum(extended_value) as sum_extended_value, days.date").joins(:day).where(:day_id => days, :user_id => contestant.id).first.sum_extended_value
+				
 				contestant_week.save
 			end
 
