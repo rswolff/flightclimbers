@@ -25,11 +25,11 @@ class Measurement < ActiveRecord::Base
 
   def increment_contestant_day
 
-    contestant_day = contestant.contest.current_day
-    contestant_week = contestant.contest.current_week
+    current_contest_day = contestant.contest.current_day
+    current_contest_week = contestant.contest.current_week
 	
-    #contestant_day = ContestantDay.get(day.id, user.id)
-    #contestant_week = ContestantWeek.get(self.contest_week, user.id)
+    contestant_day = ContestantDay.get(current_contest_day, contestant)
+    contestant_week = ContestantWeek.get(current_contest_week, contestant)
 
   	case self.direction
   	when 'up'
@@ -67,8 +67,11 @@ class Measurement < ActiveRecord::Base
 
   def decrement_contestant_day
 
-    contestant_day = ContestantDay.get(day.id, user.id)
-    contestant_week = ContestantWeek.get(self.contest_week, user.id)
+    current_contest_day = contestant.contest.current_day
+    current_contest_week = contestant.contest.current_week
+  
+    contestant_day = ContestantDay.get(current_contest_day, contestant)
+    contestant_week = ContestantWeek.get(current_contest_week, contestant)
   	
     case self.direction
   	when 'up'

@@ -3,6 +3,8 @@ class ContestDay < ActiveRecord::Base
   belongs_to :contest
   belongs_to :day
   belongs_to :contest_week
+  has_many :contesant_days
+
 end
 
 #get the number of up/down in a contest week

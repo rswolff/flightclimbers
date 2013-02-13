@@ -78,12 +78,11 @@ class ContestsController < ApplicationController
     end
   end
 
-  def leaderboard
+  def leaderboard 
+    @contest = Contest.find(params[:id])
     @overall_leaderboard = Measurement.select("sum(extended_value) as extended_value, measurements.user_id").where("contests.id = ?", @contest.id).joins(:user => :contest).order("extended_value DESC").group(:user_id)
 
-    @current_week = ContestWeek.where(["? >= start_date", Date.today]).where(["? <= end_date", Date.today]).first
-    @current_week_leaderboard = @current_week.contestant_weeks.select("SUM(total_flights_extended_value) as sum_total_flights_extended_value, contestant_id").joins(:contestant).group(:contestant_id).order("sum_total_flights_extended_value DESC")
-
+    @current_week_leaderboard = @contest.current_week.contestant_weeks.joins(:contestant).order("total_flights_extended_value DESC")
   end
 
   def rules

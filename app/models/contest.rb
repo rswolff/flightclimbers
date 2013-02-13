@@ -6,10 +6,11 @@ class Contest < ActiveRecord::Base
   has_many :contestants
   has_many :contest_weeks
   has_many :contest_days
+  belongs_to :day
 
-  after_create :initialize_contest_week
+  after_create :initialize_contest_weeks
 
-  def initialize_contest_week
+  def initialize_contest_weeks
 
   	week_count = 0
   	

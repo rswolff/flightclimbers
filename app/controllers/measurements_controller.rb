@@ -37,7 +37,7 @@ class MeasurementsController < ApplicationController
 
     #set default values
     @measurement.user_id = current_user.id
-    @measurement.day_id = Day.where(:date => Date.today).first.id
+    @measurement.day_id = Day.where(:date => Time.zone.today).first.id
 
     #TODO: move this to measurement.rb
     case @measurement.direction

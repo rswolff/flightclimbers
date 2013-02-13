@@ -53,6 +53,7 @@ gem "whenever"
 gem "money-rails"
 gem "chronic"
 gem "redcarpet"
+gem "timecop"
 group :development do
   gem "pry"
   gem "meta_request", "0.2.1"
