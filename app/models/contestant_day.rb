@@ -4,9 +4,14 @@ class ContestantDay < ActiveRecord::Base
   belongs_to :contestant
   belongs_to :contest_day
   belongs_to :contest_week
+  belongs_to :contestant_week
 
   def self.get(contest_day, contestant)
     ContestantDay.where("contest_day_id = ? AND contestant_id = ?", contest_day.id, contestant.id).first    
+  end
+
+  def day_id
+  	self.contest_day.day.id
   end
 
 end
