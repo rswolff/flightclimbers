@@ -26,4 +26,8 @@ class ContestantWeek < ActiveRecord::Base
     self.contestant_days.joins(:contest_day => :day).pluck(:day_id)
   end
 
+  def contestant_day_ids
+    self.contestant_days.pluck(:id)
+  end
+
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130213045717) do
+ActiveRecord::Schema.define(:version => 20130214201135) do
 
   create_table "contest_days", :force => true do |t|
     t.integer  "contest_id"
@@ -32,9 +32,15 @@ ActiveRecord::Schema.define(:version => 20130213045717) do
     t.integer  "contest_week"
     t.date     "start_date"
     t.date     "end_date"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                                                     :null => false
+    t.datetime "updated_at",                                                     :null => false
     t.integer  "user_id"
+    t.integer  "average_number_of_flights_up"
+    t.decimal  "average_extended_value_up",       :precision => 10, :scale => 2
+    t.integer  "average_number_of_flights_down"
+    t.decimal  "average_extended_value_down",     :precision => 10, :scale => 2
+    t.integer  "average_number_of_flights_total"
+    t.decimal  "average_extended_value_total",    :precision => 10, :scale => 2
   end
 
   create_table "contestant_days", :force => true do |t|

@@ -23,33 +23,40 @@ class ContestWeek < ActiveRecord::Base
     days = contest_days.pluck(:day_id)
   end
 
-  #TODO: check to see if this method can be deleted
-  def contestant_up_flights(contestant)
-    contestant.measurements.where(:day_id => (self.contest_days.pluck(:day_id))).where("measurements.direction = 'up'")
-  end
-
-  def average_number_of_flights_up
+  def self.average_number_of_flights_up(contest, day_ids)
     Measurement.select(["SUM(number_of_flights) as sum_number_of_flights"]).where(:day_id => day_ids).where(:user_id => contest.contestant_ids).up.first.sum_number_of_flights / contest.contestants.count
   end
 
-  def average_number_of_flights_down
+  def self.average_number_of_flights_down(contest, day_ids)
     Measurement.select(["SUM(number_of_flights) as sum_number_of_flights"]).where(:day_id => day_ids).where(:user_id => contest.contestant_ids).down.first.sum_number_of_flights / contest.contestants.count
   end
 
-  def average_extended_value_up
+  def self.average_number_of_flights_total(contest, day_ids)
+    Measurement.select(["SUM(extended_value) as sum_extended_flights"]).where(:day_id => day_ids).where(:user_id => contest.contestant_ids).first.sum_extended_flights / contest.contestants.count
+  end
+
+  def self.average_extended_value_up(contest, day_ids)
     Measurement.select(["SUM(extended_value) as sum_extended_flights"]).where(:day_id => day_ids).where(:user_id => contest.contestant_ids).up.first.sum_extended_flights / contest.contestants.count
   end
 
-  def average_extended_value_down
+  def self.average_extended_value_down(contest, day_ids)
     Measurement.select(["SUM(extended_value) as sum_extended_flights"]).where(:day_id => day_ids).where(:user_id => contest.contestant_ids).down.first.sum_extended_flights / contest.contestants.count
   end
 
-  private
+  def self.average_extended_value_total(contest, day_ids)
+    Measurement.select(["SUM(extended_value) as sum_extended_flights"]).where(:day_id => day_ids).where(:user_id => contest.contestant_ids).first.sum_extended_flights / contest.contestants.count
+  end
+
   def calculate_averages
-    average_number_of_flights_up
-    average_number_of_flights_down
-    average_extended_value_up
-    average_extended_value_down
+
+    self.average_number_of_flights_up = ContestWeek.average_number_of_flights_up(self.contest, self.day_ids)
+    self.average_number_of_flights_down = ContestWeek.average_number_of_flights_down(self.contest,self.day_ids)
+    self.average_number_of_flights_total = ContestWeek.average_number_of_flights_total(self.contest,self.day_ids)
+    self.average_extended_value_up = ContestWeek.average_extended_value_up(self.contest,self.day_ids)
+    self.average_extended_value_down = ContestWeek.average_extended_value_down(self.contest,self.day_ids)
+    self.average_extended_value_total = ContestWeek.average_extended_value_total(self.contest,self.day_ids)
+
+    save
   end  
 
 end

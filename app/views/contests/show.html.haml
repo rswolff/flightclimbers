@@ -26,8 +26,8 @@
 
   - @contest.contest_weeks.each do |week|
     %tr
-      %th= week.contest_week
+      %td= "#{week.contest_week}. #{week.start_date}"
       %td= week.contestant.full_name if week.contestant.present?
-      %td
-      %td
-      %td
+      %td= week.average_extended_value_up
+      %td= week.average_extended_value_down
+      %td= week.average_extended_value_total
