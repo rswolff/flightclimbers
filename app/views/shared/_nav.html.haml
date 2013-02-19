@@ -35,6 +35,10 @@
                 %i.icon-list
                 Leaderboard
             %li
+              = link_to talks_path do
+                %i.icon-trash
+                Trash Talk
+            %li
               = link_to rules_contest_path(current_user.contest.id) do
                 %i.icon-bullhorn
                 Rules

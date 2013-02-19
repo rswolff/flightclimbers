@@ -1,5 +1,8 @@
 Stairchallenge::Application.routes.draw do
 
+  resources :talks
+
+
   resources :measurements
   resources :users
   resources :contestants

@@ -1,0 +1,16 @@
+= form_for @talk, :html => {class: 'form-horizontal'} do |f|
+  - if @talk.errors.any?
+    #error_explanation.alert-block.alert-error
+      %h2= "#{pluralize(@talk.errors.count, "error")} prohibited this talk from being saved:"
+      %ul
+        - @talk.errors.full_messages.each do |msg|
+          %li= msg
+
+  .control-group
+    = f.label :notes, 'Talk', class: 'control-label'
+    .controls
+      = f.text_area :notes
+  .control-group
+    .controls
+      .actions
+        = f.submit 'Say It!', class: 'btn btn-primary'

@@ -1,0 +1,21 @@
+%h1 Trash Talk
+
+%table.table.table-striped
+  %tr
+    %th Author
+    %th Trash Talk
+    %th
+
+  - @talks.each do |talk|
+    %tr
+      %td= talk.contestant.full_name
+      %td= talk.notes
+      %td
+        - if can? :edit, talk
+          = link_to 'Edit', edit_talk_path(talk), class: 'btn'
+        - if can? :destroy, talk
+          = link_to 'Delete', talk, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-danger'
+
+%br
+
+= link_to 'Talk Some Trash', new_talk_path, class: 'btn btn-primary'

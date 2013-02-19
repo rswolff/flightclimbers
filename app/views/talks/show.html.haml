@@ -1,0 +1,8 @@
+%p
+  %b Contestant:
+  = @talk.contestant.full_name
+%p
+  %b Notes:
+  = @talk.notes
+
+= link_to 'Edit', edit_talk_path(@talk)
