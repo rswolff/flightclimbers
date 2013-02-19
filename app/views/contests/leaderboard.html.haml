@@ -9,9 +9,10 @@
 				%th.span1 Rank
 				%th Contestant
 			- @current_week_leaderboard.each_with_index do |contestant_week, i|
-				%tr
+				%tr{class: "#{'info' if contestant_week.contestant == current_user}"}
 					%td{style: 'text-align: center'}= i+1
-					%td= contestant_week.contestant.full_name
+					%td
+						= link_to contestant_week.contestant.display_name, contestant_path(contestant_week.contestant), :'data-toggle' => 'tooltip', :title => contestant_week.contestant.full_name
 	.span6
 		%h3 Overall
 
@@ -20,6 +21,6 @@
 				%th.span1{style: 'text-align: center'} Rank
 				%th Contestant
 			- @overall_leaderboard.each_with_index do |contestant, i|
-				%tr
+				%tr{class: "#{'info' if contestant.contestant == current_user}"}
 					%td{style: 'text-align: center'}= i+1
-					%td= contestant.user.full_name
+					%td= link_to contestant.contestant.display_name, contestant_path(contestant.contestant)

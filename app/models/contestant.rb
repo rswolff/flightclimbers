@@ -19,6 +19,22 @@ class Contestant < User
 		Measurement.select("SUM(extended_value) as extended_value").where(user_id: self.id).first.extended_value.to_s
 	end
 
+	def display_name
+		display_name = ''
+		if read_attribute(:display_name).present?
+			display_name = read_attribute(:display_name)
+		else
+			display_name = full_name
+		end
+
+		unless registration_fee_paid
+			display_name = display_name + "*"
+		end
+
+		display_name
+
+	end
+
 	def initialize_contestant_weeks
 		(self.contest.contest_weeks).each do |contest_week|
 			ContestantWeek.create(contestant_id: self.id, contest_week_id: contest_week.id)
