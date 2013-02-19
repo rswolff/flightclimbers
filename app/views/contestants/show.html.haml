@@ -1,8 +1,9 @@
 %h1= @contestant.full_name
 
-= link_to edit_contestant_path(@contestant), class: 'btn btn-primary' do
-  %i.icon-user.icon-white
-  Edit Profile
+- if can? :edit, @contestant
+  = link_to edit_contestant_path(@contestant), class: 'btn btn-primary' do
+    %i.icon-user.icon-white
+    Edit Profile
 
 - if can? :manage, Contest
   %p
@@ -12,85 +13,97 @@
     %b Accept terms:
     = @contestant.accept_terms
 
-#count_cards.row
-  .count_card.up.span2
-    .card_header
-      Up
-    .card_value
-      = @contestant.up
-  .count_card.down.span2
-    .card_header
-      Down
-    .card_value
-      = @contestant.down
-  .count_card.total.span2
-    .card_header
-      Total
-    .card_value
-      = @contestant.total
-#flight_tracking
-  %h4 Tracking
+- if can? :manage, @contestant
+  #count_cards.row
+    .count_card.up.span2
+      .card_header
+        Up
+      .card_value
+        = @contestant.up
+    .count_card.down.span2
+      .card_header
+        Down
+      .card_value
+        = @contestant.down
+    .count_card.total.span2
+      .card_header
+        Total
+      .card_value
+        = @contestant.total
+  #flight_tracking
+    %h4 Tracking
 
-  %ul.nav.nav-tabs
-    %li{class: 'active'}= link_to 'Weekly', '#weekly', :'data-toggle' => 'tab'
-    %li= link_to 'Daily', '#daily', :'data-toggle' => 'tab'
-    %li= link_to 'Entries', '#individual', :'data-toggle' => 'tab'
-  
-  .tab-content
-    #weekly.tab-pane.active
-      %table.table.table-striped
-        %tr
-          %th Week
-          %th
-            %i.icon-arrow-up
-            Up
-          %th
-            %i.icon-arrow-down
-            Down
-          %th Total
-        - current_user.contestant_weeks.each do |week|
+    %ul.nav.nav-tabs
+      %li{class: 'active'}= link_to 'Weekly', '#weekly', :'data-toggle' => 'tab'
+      %li= link_to 'Daily', '#daily', :'data-toggle' => 'tab'
+      %li= link_to 'Entries', '#individual', :'data-toggle' => 'tab'
+    
+    .tab-content
+      #weekly.tab-pane.active
+        %table.table.table-striped
           %tr
-            %td= week.contest_week.contest_week
-            %td= sprintf("%5.2f", week.up_flights_extended_value)
-            %td= sprintf("%5.2f", week.down_flights_extended_value)
-            %td= sprintf("%5.2f", week.total_flights_extended_value)
-    #daily.tab-pane
-      %table.table.table-striped
-        %tr
-          %th 
-            %i.icon-calendar
-            Date
-          %th
-            %i.icon-arrow-up
-            Up
-          %th
-            %i.icon-arrow-down
-            Down
-          %th Total
-        - current_user.contestant_days.each do |c|
+            %th Week
+            %th
+              %i.icon-arrow-up
+              Up
+            %th
+              %i.icon-arrow-up
+              Avg. Up            
+            %th
+              %i.icon-arrow-down
+              Down
+            %th
+              %i.icon-arrow-down
+              Avg. Down
+            %th Total
+            %th Avg. Total
+          - current_user.contestant_weeks.each do |week|
+            - contest_week = ContestWeek.find(week.contest_week_id)
+            %tr
+              %td= week.contest_week.contest_week
+              %td= sprintf("%5.2f", week.up_flights_extended_value)
+              %td= sprintf("%5.2f", contest_week.average_extended_value_up)
+              %td= sprintf("%5.2f", week.down_flights_extended_value)
+              %td= sprintf("%5.2f", contest_week.average_extended_value_down)
+              %td= sprintf("%5.2f", week.total_flights_extended_value)
+              %td= sprintf("%5.2f", contest_week.average_extended_value_total)
+      #daily.tab-pane
+        %table.table.table-striped
           %tr
-            %td= c.contest_day.day.date
-            %td= sprintf("%5.2f", c.up_flights_extended_value)
-            %td= sprintf("%5.2f", c.down_flights_extended_value)
-            %td= sprintf("%5.2f", c.total_flights_extended_value)
-    #individual.tab-pane
-      %table.table.table-striped
-        %tr
-          %th Date
-          %th.center Number 
-          %th Direction
-          %th Extended
-          %th Entered
-          %th Delete
-        - @contestant.measurements.joins(:day).order("measurements.created_at DESC").each do |measurement|
+            %th 
+              %i.icon-calendar
+              Date
+            %th
+              %i.icon-arrow-up
+              Up
+            %th
+              %i.icon-arrow-down
+              Down
+            %th Total
+          - current_user.contestant_days.each do |c|
+            %tr
+              %td= c.contest_day.day.date
+              %td= sprintf("%5.2f", c.up_flights_extended_value)
+              %td= sprintf("%5.2f", c.down_flights_extended_value)
+              %td= sprintf("%5.2f", c.total_flights_extended_value)
+      #individual.tab-pane
+        %table.table.table-striped
           %tr
-            %td= measurement.day.date
-            %td.center= measurement.number_of_flights
-            %td
-              - if measurement.direction == 'up'
-                %i.icon-arrow-up
-              - else
-                %i.icon-arrow-down
-            %td= sprintf("%5.2f", measurement.extended_value)
-            %td= measurement.created_at.to_s(:long)
-            %td= link_to 'Delete', measurement, :method => :delete, :confirm => "Are you sure?"
+            %th Date
+            %th.center Number 
+            %th Direction
+            %th Extended
+            %th Entered
+            %th Delete
+          - @contestant.measurements.joins(:day).order("measurements.created_at DESC").each do |measurement|
+            %tr
+              %td= measurement.day.date
+              %td.center= measurement.number_of_flights
+              %td
+                - if measurement.direction == 'up'
+                  %i.icon-arrow-up
+                - else
+                  %i.icon-arrow-down
+              %td= sprintf("%5.2f", measurement.extended_value)
+              %td= measurement.created_at.to_s(:long)
+              %td= link_to 'Delete', measurement, :method => :delete, :confirm => "Are you sure?"
