@@ -62,11 +62,11 @@
             %tr
               %td= week.contest_week.contest_week
               %td= sprintf("%5.2f", week.up_flights_extended_value)
-              %td= sprintf("%5.2f", contest_week.average_extended_value_up)
+              %td= sprintf("%5.2f", contest_week.average_extended_value_up) if contest_week.average_extended_value_up
               %td= sprintf("%5.2f", week.down_flights_extended_value)
-              %td= sprintf("%5.2f", contest_week.average_extended_value_down)
+              %td= sprintf("%5.2f", contest_week.average_extended_value_down) if contest_week.average_extended_value_down
               %td= sprintf("%5.2f", week.total_flights_extended_value)
-              %td= sprintf("%5.2f", contest_week.average_extended_value_total)
+              %td= sprintf("%5.2f", contest_week.average_extended_value_total) if contest_week.average_extended_value_total
       #daily.tab-pane
         %table.table.table-striped
           %tr
