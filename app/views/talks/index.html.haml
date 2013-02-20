@@ -8,13 +8,13 @@
 
   - @talks.each do |talk|
     %tr
-      %td
+      %td.span2
         %strong= talk.contestant.full_name
         %br
         = talk.created_at.to_date.to_s(:med_date)
         = talk.created_at.to_s(:short_time)
-      %td= talk.notes
-      %td
+      %td.span8= talk.notes
+      %td.span2
         - if can? :edit, talk
           = link_to 'Edit', edit_talk_path(talk), class: 'btn'
         - if can? :destroy, talk
