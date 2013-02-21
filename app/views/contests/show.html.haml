@@ -14,6 +14,18 @@
 - if can? :edit, @contest
   = link_to 'Edit', edit_contest_path(@contest)
 
+%h2 Totals
+%table.table.table-striped
+  %tr
+    %th Total Up Flights
+    %th Total Down Flights
+    %th Total Flights
+  %tr
+    %td= @contest.up
+    %td= "#{@contest.down} (#{@contest.down_extended})"
+    %td= @contest.total
+
+
 %h2 Weeks
 
 %table.table.table-striped#winners

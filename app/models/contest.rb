@@ -34,4 +34,20 @@ class Contest < ActiveRecord::Base
     self.contest_weeks.where(["? >= contest_weeks.start_date AND ? <= contest_weeks.end_date", Date.today, Date.today]).first
   end
 
+  def up
+    contestants.select("SUM(measurements.number_of_flights) as sum_number_of_flights").joins(:measurements).where("measurements.direction = 'up'").first.sum_number_of_flights
+  end
+
+  def down
+    contestants.select("SUM(measurements.number_of_flights) as sum_number_of_flights").joins(:measurements).where("measurements.direction = 'down'").first.sum_number_of_flights
+  end
+
+  def down_extended
+    contestants.select("SUM(measurements.extended_value) as sum_number_of_flights").joins(:measurements).where("measurements.direction = 'down'").first.sum_number_of_flights
+  end
+
+  def total
+    contestants.select("SUM(measurements.number_of_flights) as sum_number_of_flights").joins(:measurements).first.sum_number_of_flights
+  end
+
 end
