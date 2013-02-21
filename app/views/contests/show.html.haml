@@ -16,18 +16,12 @@
 
 %h2 Weeks
 
-%table.table.table-striped
+%table.table.table-striped#winners
   %tr
-    %th Week
-    %th Winner
-    %th Average Up
-    %th Average Down
-    %th Average Total
+    %th.week Week
+    %th.winner Winner
 
   - @contest.contest_weeks.each do |week|
     %tr
       %td= "#{week.contest_week}. #{week.start_date}"
-      %td= week.contestant.full_name if week.contestant.present?
-      %td= week.average_extended_value_up
-      %td= week.average_extended_value_down
-      %td= week.average_extended_value_total
+      %td= link_to(week.contestant.display_name, contestant_path(week.contestant)) if week.contestant.present?
