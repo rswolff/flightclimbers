@@ -27,9 +27,9 @@ class PasswordResetsController < ApplicationController
     @user = User.load_from_reset_password_token(params[:token])
     not_authenticated unless @user
     # the next line makes the password confirmation validation work
-    @user.password_confirmation = params[:user][:password_confirmation]
+    @user.password_confirmation = params[:contestant][:password_confirmation]
     # the next line clears the temporary token and updates the password
-    if @user.change_password!(params[:user][:password])
+    if @user.change_password!(params[:contestant][:password])
       redirect_to(root_path, :notice => 'Password was successfully updated.')
     else
       render :action => "edit"
