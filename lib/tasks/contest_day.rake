@@ -1,5 +1,5 @@
 namespace :contest_day do
-	task :award_daily_badges => :environment do
+	task :award_badges => :environment do
 		contest = Contest.find(ENV["CONTEST_ID"])
 
 		contest.contest_days.each do |contest_day|

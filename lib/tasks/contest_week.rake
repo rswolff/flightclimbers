@@ -36,7 +36,7 @@ namespace :contest_week do
 
 	end
 
-	task :award_weekly_badges => :environment do
+	task :award_badges => :environment do
 		contest = Contest.find(ENV["CONTEST_ID"])
 		contest.contest_weeks.each do |contest_week|
 
