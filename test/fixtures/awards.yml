@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  contestant_id: 1
+  badge_id: 1
+  contestable_id: 1
+  contestable_type: MyString
+
+two:
+  contestant_id: 1
+  badge_id: 1
+  contestable_id: 1
+  contestable_type: MyString

@@ -57,6 +57,18 @@ class ContestWeek < ActiveRecord::Base
     self.average_extended_value_total = ContestWeek.average_extended_value_total(self.contest,self.day_ids)
 
     save
+  end
+
+  def max_up_contestant
+    Measurement.select("SUM(extended_value) as sum_extended_value, user_id").where(day_id: self.day_ids).where(direction: 'up').group(:user_id).order("sum_extended_value DESC").limit(1).first
   end  
+
+  def max_down_contestant
+    Measurement.select("SUM(extended_value) as sum_extended_value, user_id").where(day_id: self.day_ids).where(direction: 'down').group(:user_id).order("sum_extended_value DESC").limit(1).first
+  end
+
+  def max_total_contestant
+    Measurement.select("SUM(extended_value) as sum_extended_value, user_id").where(day_id: self.day_ids).group(:user_id).order("sum_extended_value DESC").limit(1).first
+  end
 
 end

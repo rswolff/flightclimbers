@@ -6,6 +6,8 @@ class ContestantDay < ActiveRecord::Base
   belongs_to :contest_week
   belongs_to :contestant_week
 
+  has_many :awards, :as => :contestable
+
   def self.get(contest_day, contestant)
     ContestantDay.where("contest_day_id = ? AND contestant_id = ?", contest_day.id, contestant.id).first    
   end

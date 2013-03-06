@@ -3,6 +3,7 @@ class ContestantWeek < ActiveRecord::Base
   belongs_to :contestant 
   belongs_to :contest_week
   has_many :contestant_days
+  has_many :awards, :as => :contestable
 
   after_create :initialize_contestant_days 
 

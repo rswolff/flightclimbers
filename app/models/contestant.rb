@@ -4,6 +4,9 @@ class Contestant < User
 	has_many :contestant_weeks
 	has_many :contest_weeks, :foreign_key => 'user_id'
 	belongs_to :contest
+	has_many :awards
+	has_many :badges, :through => :awards
+
 
 	after_create :initialize_contestant_weeks
 

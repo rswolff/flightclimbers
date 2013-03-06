@@ -11,7 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130219142116) do
+ActiveRecord::Schema.define(:version => 20130305200511) do
+
+  create_table "awards", :force => true do |t|
+    t.integer  "contestant_id"
+    t.integer  "badge_id"
+    t.integer  "contestable_id"
+    t.string   "contestable_type"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  create_table "badges", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "interval"
+  end
 
   create_table "contest_days", :force => true do |t|
     t.integer  "contest_id"

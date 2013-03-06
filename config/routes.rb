@@ -1,11 +1,16 @@
 Stairchallenge::Application.routes.draw do
 
+  resources :badges
+
+
   resources :talks
 
 
   resources :measurements
   resources :users
-  resources :contestants
+  resources :contestants do
+    resources :contestant_days
+  end
   resources :contests do
     member do 
       get 'leaderboard'

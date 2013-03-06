@@ -13,6 +13,16 @@
     %b Accept terms:
     = @contestant.accept_terms
 
+%h2 Awards
+- @contestant.awards.each do |award|
+  - case award.contestable.class.to_s
+    - when 'ContestDay'
+      .label.label-warning
+        = "#{award.badge.name} : #{award.contestable.day.date}"
+    - when 'ContestWeek'
+      .label.label-info
+        = "#{award.badge.name} : #{award.contestable.end_date}"
+
 - if can? :manage, @contestant
   #count_cards.row
     .count_card.up.span2
@@ -82,7 +92,7 @@
             %th Total
           - current_user.contestant_days.each do |c|
             %tr
-              %td= c.contest_day.day.date
+              %td= link_to c.contest_day.day.date, contestant_contestant_day_path(@contestant, c)
               %td= sprintf("%5.2f", c.up_flights_extended_value)
               %td= sprintf("%5.2f", c.down_flights_extended_value)
               %td= sprintf("%5.2f", c.total_flights_extended_value)

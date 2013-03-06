@@ -28,10 +28,11 @@ class Ability
     user ||= User.new
 
     if user.role == 'admin'
-        can :manage, [User, Contestant, Contest, Measurement]
+        can :manage, [User, Contestant, Contest, Measurement, Badge]
     else
         can [:read], [User, Contestant]
         can :manage, [User, Contestant], :id => user.id
+        can [:read, :update], ContestantDay, :contestant_id => user.id
         can :manage, Measurement, :user_id => user.id
         can [:leaderboard, :rules], Contest
         can [:read], Contest, :id => user.contest_id

@@ -1,0 +1,21 @@
+%h1 Listing badges
+
+%table.table.table-bordered.table-striped
+  %tr
+    %th Name
+    %th Description
+    %th
+    %th
+    %th
+
+  - @badges.each do |badge|
+    %tr
+      %td= badge.name
+      %td= badge.description
+      %td= link_to 'Show', badge
+      %td= link_to 'Edit', edit_badge_path(badge)
+      %td= link_to 'Destroy', badge, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Badge', new_badge_path, class: 'btn btn-primary'
