@@ -14,14 +14,19 @@
     = @contestant.accept_terms
 
 %h2 Awards
-- @contestant.awards.each do |award|
-  - case award.contestable.class.to_s
-    - when 'ContestDay'
-      .label.label-warning
-        = "#{award.badge.name} : #{award.contestable.day.date}"
-    - when 'ContestWeek'
-      .label.label-info
-        = "#{award.badge.name} : #{award.contestable.end_date}"
+
+- Badge.all.each do |badge|
+  %h4
+    = badge.name 
+    .badge.badge-important= @contestant.awards.where(badge_id: badge.id).count
+  - @contestant.awards.where(badge_id: badge.id).each do |award|
+    - case award.contestable.class.to_s
+      - when 'ContestDay'
+        .label.label-warning
+          = "#{award.contestable.day.date}"
+      - when 'ContestWeek'
+        .label.label-info
+          = "#{award.contestable.end_date}"
 
 - if can? :manage, @contestant
   #count_cards.row
