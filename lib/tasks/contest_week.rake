@@ -37,17 +37,15 @@ namespace :contest_week do
 	end
 
 	task :award_badges => :environment do
-		contest = Contest.find(ENV["CONTEST_ID"])
-		contest.contest_weeks.each do |contest_week|
+		contest_week = ContestDay.find(ENV["ID"])
 
-			up_contestant = contest_week.max_up_contestant
-			down_contestant = contest_week.max_down_contestant
-			total_contestant = contest_week.max_total_contestant
-			
-			Badge.find(4).award(up_contestant.user_id, 'ContestWeek', contest_week.id) unless up_contestant.nil? #most up
-			Badge.find(5).award(down_contestant.user_id, 'ContestWeek', contest_week.id) unless down_contestant.nil? #most down
-			Badge.find(9).award(total_contestant.user_id, 'ContestWeek', contest_week.id) unless total_contestant.nil? #most total		
+		up_contestant = contest_week.max_up_contestant
+		down_contestant = contest_week.max_down_contestant
+		total_contestant = contest_week.max_total_contestant
+		
+		Badge.find(4).award(up_contestant.user_id, 'ContestWeek', contest_week.id) unless up_contestant.nil? #most up
+		Badge.find(5).award(down_contestant.user_id, 'ContestWeek', contest_week.id) unless down_contestant.nil? #most down
+		Badge.find(9).award(total_contestant.user_id, 'ContestWeek', contest_week.id) unless total_contestant.nil? #most total		
 
-		end
 	end
 end
