@@ -1,26 +1,4 @@
 %h1 Leaderboard
 
+%p The leaderboard has been taken down. You may still enter flights until the contest is over on Sunday April 14th at 11:15:59.
 
-.row
-	.span6
-		%h3 Current Week
-		%table.table.table-striped
-			%tr
-				%th.span1 Rank
-				%th Contestant
-			- @current_week_leaderboard.each_with_index do |contestant_week, i|
-				%tr{class: "#{'info' if contestant_week.contestant == current_user}"}
-					%td{style: 'text-align: center'}= i+1
-					%td
-						= link_to contestant_week.contestant.display_name, contestant_path(contestant_week.contestant), :'data-toggle' => 'tooltip', :title => contestant_week.contestant.full_name
-	.span6
-		%h3 Overall
-
-		%table.table.table-striped
-			%tr
-				%th.span1{style: 'text-align: center'} Rank
-				%th Contestant
-			- @overall_leaderboard.each_with_index do |contestant, i|
-				%tr{class: "#{'info' if contestant.contestant == current_user}"}
-					%td{style: 'text-align: center'}= i+1
-					%td= link_to contestant.contestant.display_name, contestant_path(contestant.contestant)
